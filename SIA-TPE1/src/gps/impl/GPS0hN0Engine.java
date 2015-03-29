@@ -31,6 +31,11 @@ public class GPS0hN0Engine extends GPSEngine {
 			
 			this.getOpen().add(i,node);
 		}
+		
+		if(this.getStrategy().equals(SearchStrategy.Iterative))
+		{
+			
+		}
 				
 	}
 
