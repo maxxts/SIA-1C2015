@@ -13,7 +13,7 @@ import java.util.List;
 public abstract class GPSEngine {
 
 	private List<GPSNode> open = new LinkedList<GPSNode>();
-
+	
 	private List<GPSNode> closed = new ArrayList<GPSNode>();
 
 	private GPSProblem problem;
@@ -31,7 +31,7 @@ public abstract class GPSEngine {
 		boolean failed = false;
 		long explosionCounter = 0;
 		
-		//We fill the blanks with blue cells to beforehand
+		// We fill the blanks with blue cells to beforehand
 		((GPS0hN0State) rootNode.getState()).prepareBoardForSearch();
 		
 		open.add(rootNode);
@@ -116,6 +116,11 @@ public abstract class GPSEngine {
 	public void setStrategy(SearchStrategy strategy) {
 		this.strategy = strategy;
 	}
+	
+	public List<GPSNode> getOpen() {
+		return open;
+	}
+
 
 	public abstract  void addNode(GPSNode node);
 	

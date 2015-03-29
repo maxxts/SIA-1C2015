@@ -13,8 +13,7 @@ public class Game0hN0Solver {
 		if (args.length != 1) {
 			System.out.println("Invalid arguments.");
 			return;
-		}
-		
+		}		
 		
 		GPSProblem problem = new GPS0hN0Problem();
 		GPSEngine solver = new GPS0hN0Engine();
@@ -25,6 +24,18 @@ public class Game0hN0Solver {
 		{
 			System.out.println("Initializing " + SearchStrategy.Iterative.toString() + " search...");
 			solver.engine(problem, SearchStrategy.Iterative);
+		}
+		
+		if (searchStrategy.equalsIgnoreCase(SearchStrategy.DFS.toString()))
+		{
+			System.out.println("Initializing " + SearchStrategy.DFS.toString() + " search...");
+			solver.engine(problem, SearchStrategy.DFS);
+		}
+		
+		if (searchStrategy.equalsIgnoreCase(SearchStrategy.BFS.toString()))
+		{
+			System.out.println("Initializing " + SearchStrategy.BFS.toString() + " search...");
+			solver.engine(problem, SearchStrategy.BFS);
 		}
 	}
 
