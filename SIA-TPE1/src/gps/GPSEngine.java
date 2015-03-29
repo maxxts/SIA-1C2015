@@ -3,6 +3,7 @@ package gps;
 import gps.api.GPSProblem;
 import gps.api.GPSRule;
 import gps.api.GPSState;
+import gps.api.impl.GPS0hN0State;
 import gps.exception.NotAppliableException;
 
 import java.util.ArrayList;
@@ -12,7 +13,7 @@ import java.util.List;
 public abstract class GPSEngine {
 
 	private List<GPSNode> open = new LinkedList<GPSNode>();
-
+	
 	private List<GPSNode> closed = new ArrayList<GPSNode>();
 
 	private GPSProblem problem;
@@ -23,13 +24,16 @@ public abstract class GPSEngine {
 	public void engine(GPSProblem myProblem, SearchStrategy myStrategy) {
 
 		problem = myProblem;
-		strategy = myStrategy;
+		setStrategy(myStrategy);
 
 		GPSNode rootNode = new GPSNode(problem.getInitState(), 0);
 		boolean finished = false;
 		boolean failed = false;
 		long explosionCounter = 0;
-
+		
+		// We fill the blanks with blue cells to beforehand
+		((GPS0hN0State) rootNode.getState()).prepareBoardForSearch();
+		
 		open.add(rootNode);
 		while (!failed && !finished) {
 			if (open.size() <= 0) {
@@ -104,6 +108,19 @@ public abstract class GPSEngine {
 		return checkBranch(parent.getParent(), state)
 				|| state.compare(parent.getState());
 	}
+
+	public SearchStrategy getStrategy() {
+		return strategy;
+	}
+
+	public void setStrategy(SearchStrategy strategy) {
+		this.strategy = strategy;
+	}
+	
+	public List<GPSNode> getOpen() {
+		return open;
+	}
+
 
 	public abstract  void addNode(GPSNode node);
 	
