@@ -34,7 +34,16 @@ public abstract class GPS0hN0Problem implements GPSProblem{
 
 	@Override
 	public List<GPSRule> getRules() {
-		return getRulesImpl();
+		
+		List<GPSRule> rules = new LinkedList<GPSRule>();
+		int i, j;
+		for (i = 0; i < GPS0hN0State.BOARD_SIZE; i++) {
+			for (j = 0; j < GPS0hN0State.BOARD_SIZE; j++) {
+				rules.add(getRule(i,j));
+			}
+		}
+
+		return rules;
 	}
 
 	@Override
@@ -42,21 +51,9 @@ public abstract class GPS0hN0Problem implements GPSProblem{
 		return getHValueImpl(state);
 	}
 	
-	public abstract List<GPSRule> getRulesImpl();
+	public abstract GPSRule getRule(int i, int j);
 	
 	public abstract Integer getHValueImpl(GPSState state);
 	
-	public List<GPSRule> getRulesByColor(Color fillColor){
-		
-		List<GPSRule> rules = new LinkedList<GPSRule>();
-		int i, j;
-		for (i = 0; i < GPS0hN0State.BOARD_SIZE; i++) {
-			for (j = 0; j < GPS0hN0State.BOARD_SIZE; j++) {
-				rules.add(((GPSRule) new GPS0hN0Rule(i, j, fillColor)));
-			}
-		}
-
-		return rules;
-	}
 
 }

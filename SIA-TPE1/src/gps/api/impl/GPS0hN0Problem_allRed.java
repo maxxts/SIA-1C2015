@@ -1,15 +1,13 @@
 package gps.api.impl;
 
-import java.util.List;
-
 import gps.api.GPSRule;
 import gps.api.GPSState;
 
 public class GPS0hN0Problem_allRed extends GPS0hN0Problem{
 
 	@Override
-	public List<GPSRule> getRulesImpl() {
-		return getRulesByColor(Color.blue);
+	public GPSRule getRule(int i, int j) {
+		return new GPS0hN0Rule_BLUE(i, j);
 	}
 
 	@Override
@@ -25,6 +23,7 @@ public class GPS0hN0Problem_allRed extends GPS0hN0Problem{
 		return unComplete;
 		
 	}
+
 
 
 }

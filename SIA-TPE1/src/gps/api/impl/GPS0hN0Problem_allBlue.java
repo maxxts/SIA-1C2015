@@ -2,16 +2,15 @@ package gps.api.impl;
 
 import gps.api.GPSRule;
 import gps.api.GPSState;
-import java.util.LinkedList;
-import java.util.List;
+
 
 public class GPS0hN0Problem_allBlue extends GPS0hN0Problem {
 
 	@Override
-	public List<GPSRule> getRulesImpl() {
-		return getRulesByColor(Color.red);
+	public GPSRule getRule(int i, int j) {
+		return new GPS0hN0Rule_RED(i, j);
 	}
-
+	
 	@Override
 	public Integer getHValueImpl(GPSState state) {
 
@@ -37,32 +36,6 @@ public class GPS0hN0Problem_allBlue extends GPS0hN0Problem {
 		return unComplete - 1 - intersections;
 	}
 
-	// It checks how many cells are visible for the one being analyzed
-	private int visibleCells(CellWrapper cell, GPS0hN0Cell[][] board) {
-
-		int visibleCells = 0;
-		int row = cell.getI();
-		int col = cell.getJ();
-
-		int rows = board.length;
-		int cols = board[0].length;
-
-		// Check how many cells it sees in the same row
-		for (int j = 0; j < cols; j++) {
-			if (j != col && board[row][j].getColor() == Color.blue) {
-				visibleCells++;
-			}
-		}
-
-		// Check how many cells it sees in the same column
-		for (int i = 0; i < rows; i++) {
-			if (i != row && board[i][col].getColor() == Color.blue) {
-				visibleCells++;
-			}
-		}
-
-		return visibleCells;
-	}
 
 	private int sumIntersections(GPS0hN0State state) {
 
@@ -126,4 +99,5 @@ public class GPS0hN0Problem_allBlue extends GPS0hN0Problem {
 
 		return intersections;
 	}
+
 }
