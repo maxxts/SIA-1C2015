@@ -3,6 +3,7 @@ package gps;
 import gps.api.GPSProblem;
 import gps.api.GPSRule;
 import gps.api.GPSState;
+import gps.api.impl.GPS0hN0State;
 import gps.exception.NotAppliableException;
 
 import java.util.ArrayList;
@@ -31,6 +32,7 @@ public abstract class GPSEngine {
 		long explosionCounter = 0;
 		
 		//We fill the blanks with blue cells to beforehand
+		((GPS0hN0State) rootNode.getState()).prepareBoardForSearch();
 		
 		open.add(rootNode);
 		while (!failed && !finished) {
