@@ -36,10 +36,10 @@ public class GPS0hN0Rule implements GPSRule {
 		
 		if (cell.getValue() == 0)
 		{
-			GPS0hN0State newState = new GPS0hN0State(((GPS0hN0State)state).getBoard());
-			cell = newState.getBoard()[x][y];
-			cell.setColor(color);
-			return newState;
+			//GPS0hN0State newState = new GPS0hN0State(((GPS0hN0State)state).getBoard());
+			//cell = newState.getBoard()[x][y];
+			//cell.setColor(color);
+			//return newState;
 		}
 		
 		throw new NotAppliableException();

@@ -2,8 +2,8 @@ package gps.api.impl;
 
 public class GPS0hN0Cell {
 	
-	private int value;
-	private boolean fixed;
+	private int value=0;
+	private boolean fixed = false;
 	private Color color = Color.white;
 	
 	public GPS0hN0Cell (int value, Color color, boolean fixed)
