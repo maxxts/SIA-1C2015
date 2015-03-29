@@ -33,7 +33,7 @@ public class GPS0hN0Problem implements GPSProblem {
 		init_board[6][6] = new GPS0hN0Cell(5, Color.blue, true);
 		
 		
-		return null;
+		return new GPS0hN0State(init_board);
 	}
 
 
