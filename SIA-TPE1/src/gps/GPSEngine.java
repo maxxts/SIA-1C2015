@@ -23,13 +23,15 @@ public abstract class GPSEngine {
 	public void engine(GPSProblem myProblem, SearchStrategy myStrategy) {
 
 		problem = myProblem;
-		strategy = myStrategy;
+		setStrategy(myStrategy);
 
 		GPSNode rootNode = new GPSNode(problem.getInitState(), 0);
 		boolean finished = false;
 		boolean failed = false;
 		long explosionCounter = 0;
-
+		
+		//We fill the blanks with blue cells to beforehand
+		
 		open.add(rootNode);
 		while (!failed && !finished) {
 			if (open.size() <= 0) {
@@ -103,6 +105,14 @@ public abstract class GPSEngine {
 		}
 		return checkBranch(parent.getParent(), state)
 				|| state.compare(parent.getState());
+	}
+
+	public SearchStrategy getStrategy() {
+		return strategy;
+	}
+
+	public void setStrategy(SearchStrategy strategy) {
+		this.strategy = strategy;
 	}
 
 	public abstract  void addNode(GPSNode node);
