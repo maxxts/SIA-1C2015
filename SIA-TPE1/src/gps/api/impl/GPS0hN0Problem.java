@@ -83,7 +83,6 @@ public class GPS0hN0Problem implements GPSProblem {
 		return rules;
 	}
 
-	
 	//REVISAR!!!!
 	
 	@Override
