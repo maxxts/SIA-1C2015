@@ -10,6 +10,8 @@ import java.util.List;
 
 public class GPS0hN0Problem implements GPSProblem {
 
+	public static int BOARD_SIZE = 7;
+	
 	@Override
 	public GPSState getInitState() {
 		
@@ -67,14 +69,13 @@ public class GPS0hN0Problem implements GPSProblem {
 		return new GPS0hN0State(init_board,cellsToCheck);
 	}
 
-
 	@Override
 	public List<GPSRule> getRules() {
 		
 		List<GPSRule> rules = new LinkedList<GPSRule>(); 
 		int i,j;
-		for (i = 0; i<7; i++){
-			for (j = 0; j < 7; j++){
+		for (i = 0; i < BOARD_SIZE ; i++){
+			for (j = 0; j < BOARD_SIZE; j++){
 				rules.add( ((GPSRule) new GPS0hN0Rule(i,j,Color.red)));
 			}
 		}
@@ -82,40 +83,142 @@ public class GPS0hN0Problem implements GPSProblem {
 		return rules;
 	}
 
+	
+	//REVISAR!!!!
+	
 	@Override
 	public Integer getHValue(GPSState state) {
-		// TODO Max: "Creo que esto lo podriamos dejar... o lo queres hacer?"
-		return 23;
+		
+		GPS0hN0State ohno_state = (GPS0hN0State) state;
+		
+		//Implementacion de heuristica admisible
+		
+		int unComplete = 0;
+		
+		for(CellWrapper cell: ohno_state.getCellsToCheck()){
+			if(!cell.getCell().isCompleted()){
+				unComplete++;
+			}
+		}
+		
+		int intersections = sumIntersections(ohno_state);
+		
+		if(unComplete == 0){
+			return 0;
+		}
+		
+		return unComplete - 1 - intersections;
 	}
 
 
 	@Override
 	public boolean isGoal(GPSState state) {
 		
-		// TODO Auto-generated method stub
-		
 		GPS0hN0State ohno_state = ((GPS0hN0State)state);
 		GPS0hN0Cell[][] ohno_board = ohno_state.getBoard();
-		
-		int rows = ohno_board.length;
-		int cols = ohno_board[0].length;
 		
 		List<CellWrapper> cellsToCheck = ohno_state.getCellsToCheck();
 		
 		for(CellWrapper cell : cellsToCheck){
 			
-			int sees = 0;
-			int row = cell.getI();
+			/*int sees = visibleCells(cell,ohno_board);
 			
-			//Check how many cells it sees in the same column
-			for(int j = 0 ; j < cols ; j++ ){
-				//if(board[row][j])
+			if(sees != cell.getCell().getValue()){
+				return false;
+			}*/
+			
+			if(!cell.getCell().isCompleted()){
+				return false;
 			}
 			
 		}
 		
 		
-		return false;
+		return true;
+	}
+	
+	//It checks how many cells are visible for the one to analyze
+	private int visibleCells(CellWrapper cell, GPS0hN0Cell[][] board){
+		
+		int visibleCells = 0;
+		int row = cell.getI();
+		int col = cell.getJ();
+		
+		//Check how many cells it sees in the same row
+		for(int j = 0 ; j < BOARD_SIZE ; j++ ){
+			if( j != col && board[row][j].getColor() == Color.blue){
+				visibleCells++;
+			}
+		}
+		
+		//Check how many cells it sees in the same column
+		for(int i = 0; i < BOARD_SIZE ; i++){
+			if( i != row && board[i][col].getColor() == Color.blue){
+				visibleCells++;
+			}
+		}
+		
+		return visibleCells;
+	}
+	
+	private int sumIntersections(GPS0hN0State state){
+		
+		int intersections = 0;
+		
+		boolean flag = false;
+		
+		int col,row;
+		
+		//First step: check for interceptions in same columns
+		for(col = 0 ; col < BOARD_SIZE ; col ++){
+			for(row = 0 ; row < BOARD_SIZE ; row++){
+				GPS0hN0Cell cell = state.getBoard()[row][col];
+				
+				if(cell.getValue() != 0 && !cell.isCompleted()){
+					
+					if(flag){
+						intersections++;
+						if(row + 1 < BOARD_SIZE && state.getBoard()[row+1][col].getValue() != 0){
+							flag = false;							
+						} 
+					} else if(row + 1 < BOARD_SIZE && state.getBoard()[row+1][col].getValue() == 0){						
+						flag = true;
+					}
+				} else if(cell.getColor() == Color.red) {
+					flag = false;
+				}
+			}
+			
+			flag = false;
+			
+		}
+		
+		//Second: Check for interceptions in same row
+		for(row = 0 ; row < BOARD_SIZE ; row ++){
+			for(col = 0 ; col < BOARD_SIZE ; col++){
+				GPS0hN0Cell cell = state.getBoard()[row][col];
+				
+				if(cell.getValue() != 0 && !cell.isCompleted()){
+					
+					if(flag){
+						intersections++;
+						if(row + 1 < BOARD_SIZE && state.getBoard()[row][col+1].getValue() != 0){
+							flag = false;							
+						} 
+					} else if(row + 1 < BOARD_SIZE && state.getBoard()[row][col+1].getValue() == 0){						
+						flag = true;
+					}
+				} else if(cell.getColor() == Color.red) {
+					flag = false;
+				}
+			}
+			
+			flag = false;
+			
+		}
+		
+		
+		return intersections;
 	}
 
 }
