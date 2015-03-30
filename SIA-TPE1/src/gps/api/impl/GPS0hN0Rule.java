@@ -41,7 +41,9 @@ public abstract class GPS0hN0Rule implements GPSRule {
 			throw new NotAppliableException();
 		}
 
-		board[i][j] = new GPS0hN0Cell(color);
+		//board[i][j] = new GPS0hN0Cell(color);
+		
+		auxState.getBoard()[i][j] = new GPS0hN0Cell(color);
 
 		for (CellWrapper cell : auxState.getCellsToCheck()) {
 
