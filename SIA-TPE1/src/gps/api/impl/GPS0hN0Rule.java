@@ -31,7 +31,7 @@ public abstract class GPS0hN0Rule implements GPSRule {
 	@Override
 	public GPSState evalRule(GPSState state) throws NotAppliableException {
 
-		GPS0hN0State auxState = ((GPS0hN0State)state).cloneState();
+		GPS0hN0State auxState = ((GPS0hN0State) state).cloneState();
 
 		GPS0hN0Cell cellAt = auxState.getBoard()[i][j];
 
@@ -39,9 +39,7 @@ public abstract class GPS0hN0Rule implements GPSRule {
 			throw new NotAppliableException();
 		}
 
-		
 		auxState.getBoard()[i][j] = new GPS0hN0Cell(color);
-		
 
 		for (CellWrapper cell : auxState.getCellsToCheck()) {
 
@@ -70,24 +68,65 @@ public abstract class GPS0hN0Rule implements GPSRule {
 		int row = cell.getI();
 		int col = cell.getJ();
 
-		int rows = board.length;
-		int cols = board[0].length;
+		boolean redFound = false;
 
-		// Check how many cells it sees in the same row
-		for (int j = 0; j < cols; j++) {
-			if (j != col && board[row][j].getColor() == Color.blue) {
-				visibleCells++;
+
+		// Check from cell position to left (j--)
+		if (col != 0) {
+			for (int j = col - 1; j >= 0 && !redFound; j--) {
+
+				if (board[row][j].getColor().equals(Color.red)) {
+					redFound = true;
+				} else if (board[row][j].getColor().equals(Color.blue)) {
+					visibleCells++;
+				}
+
 			}
+
+			redFound = false;
 		}
 
-		// Check how many cells it sees in the same column
-		for (int i = 0; i < rows; i++) {
-			if (i != row && board[i][col].getColor() == Color.blue) {
-				visibleCells++;
+		// Check from cell position to right (j++)
+		if (col + 1 != GPS0hN0State.BOARD_SIZE) {
+			for (int j = col + 1; j < GPS0hN0State.BOARD_SIZE && !redFound; j++) {
+
+				if (board[row][j].getColor().equals(Color.red)) {
+					redFound = true;
+				} else if (board[row][j].getColor().equals(Color.blue)) {
+					visibleCells++;
+				}
+
 			}
+
+			redFound = false;
+		}
+
+		// Check from cell position up (i--)
+		if(row != 0){
+			for(int i = row - 1 ; i >= 0 && !redFound ; i--){
+				if (board[i][col].getColor().equals(Color.red)) {
+					redFound = true;
+				} else if (board[i][col].getColor().equals(Color.blue)) {
+					visibleCells++;
+				}
+			}
+			
+			redFound = false;
+		}
+		
+		// Check from cell position down (i++)
+		if(row + 1 != GPS0hN0State.BOARD_SIZE){
+			for(int i = row + 1 ; i < GPS0hN0State.BOARD_SIZE && !redFound ; i++){
+				if (board[i][col].getColor().equals(Color.red)) {
+					redFound = true;
+				} else if (board[i][col].getColor().equals(Color.blue)) {
+					visibleCells++;
+				}
+			}
+			
+			redFound = false;
 		}
 
 		return visibleCells;
 	}
-
 }
