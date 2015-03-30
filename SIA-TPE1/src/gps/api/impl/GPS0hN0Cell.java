@@ -60,7 +60,7 @@ public class GPS0hN0Cell {
 		
 		GPS0hN0Cell other_cell = (GPS0hN0Cell) other;
 		
-		return fixed != other_cell.isFixed() || color != other_cell.getColor() || value != other_cell.getValue();
+		return fixed != other_cell.isFixed() || color.equals(other_cell.getColor()) || value != other_cell.getValue();
 		
 	}
 
