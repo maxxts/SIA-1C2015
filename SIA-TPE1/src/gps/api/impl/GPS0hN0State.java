@@ -22,7 +22,7 @@ public class GPS0hN0State implements GPSState {
 	public GPS0hN0State(){
 		
 		board = new GPS0hN0Cell[BOARD_SIZE][BOARD_SIZE];
-		List<CellWrapper> cellsToCheck = new ArrayList<CellWrapper>();
+		cellsToCheck = new ArrayList<CellWrapper>();
 		
 		board[0][1] = new GPS0hN0Cell(3,Color.blue,true);
 		cellsToCheck.add(new CellWrapper(0,1,board[0][1]));
