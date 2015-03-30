@@ -23,5 +23,13 @@ public class CellWrapper {
 	public GPS0hN0Cell getCell(){
 		return cell;
 	}
+	
+	
+	public CellWrapper clone() {
+		
+		GPS0hN0Cell cell_clone = (GPS0hN0Cell) cell.cloneCell();
+		
+		return new CellWrapper(i,j,cell_clone);
+	}
 
 }
