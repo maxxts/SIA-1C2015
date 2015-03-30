@@ -18,6 +18,28 @@ public class GPS0hN0State implements GPSState {
 		this.cellsToCheck = initCells;
 	}
 	
+	public GPS0hN0State (GPS0hN0State anotherState)
+	{
+		this.board = anotherState.board.clone();
+		this.board =  new GPS0hN0Cell[BOARD_SIZE][BOARD_SIZE];
+		
+		for(int i=0 ; i < GPS0hN0State.BOARD_SIZE ; i++ ){
+			
+			for(int j = 0 ; j < GPS0hN0State.BOARD_SIZE ; j++){
+				
+				try {
+					this.board[i][j] = (GPS0hN0Cell) anotherState.board[i][j].clone();
+				} catch (CloneNotSupportedException e) {
+					// TODO Que asco, no?
+				}
+				
+			}
+		}
+		
+		// TODO Clonar el cells to check?
+		this.cellsToCheck = anotherState.cellsToCheck;
+	}
+	
 	//Returns a state initialized
 	public GPS0hN0State(){
 		
