@@ -121,6 +121,10 @@ public abstract class GPSEngine {
 	public List<GPSNode> getOpen() {
 		return open;
 	}
+	
+	public GPSProblem getProblem(){
+		return problem;
+	}
 
 
 	public abstract  void addNode(GPSNode node);
