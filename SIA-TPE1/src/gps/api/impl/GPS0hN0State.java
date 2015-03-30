@@ -73,14 +73,23 @@ public class GPS0hN0State implements GPSState {
 		
 	}
 	
-	public boolean addTile (Color color, int x, int y) {
+	public GPS0hN0State cloneState(){
 		
-		GPS0hN0Cell cell = board[x][y];
-		if (cell == null || cell.getValue() == 0){
-			board[x][y] = new GPS0hN0Cell(color);
-			return true;
+		GPS0hN0Cell[][] board_clone = new GPS0hN0Cell[BOARD_SIZE][BOARD_SIZE];
+		List<CellWrapper> cellsToCheck_clone = new ArrayList<CellWrapper>();
+		
+		for(int i=0 ; i < BOARD_SIZE ; i++){
+			for(int j=0 ; j < BOARD_SIZE ; j++){
+				board_clone[i][j] = (GPS0hN0Cell) board[i][j].cloneCell();
+			}
 		}
-		return false;
+		
+		for(CellWrapper cell: cellsToCheck){
+			cellsToCheck_clone.add(cell.clone());
+		}
+		
+		return new GPS0hN0State(board_clone, cellsToCheck_clone);
+		
 	}
 	
 	public GPS0hN0Cell[][] getBoard() {
