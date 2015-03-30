@@ -10,7 +10,7 @@ public class GPS0hN0Engine extends GPSEngine {
 	@Override
 	public void addNode(GPSNode node) {
 		
-		System.out.println("Executing " + this.getStrategy().toString() + " addNode step...");
+		//System.out.println("Executing " + this.getStrategy().toString() + " addNode step...");
 		
 		// TODO: Ver de sacar el caso base
 		
@@ -98,6 +98,18 @@ public class GPS0hN0Engine extends GPSEngine {
 			}		
 			
 		}
+		
+		if(this.getStrategy().equals(SearchStrategy.Greedy))
+		{
+			
+		}
+		
+		if(this.getStrategy().equals(SearchStrategy.AStar))
+		{
+			
+		}
+		
+		
 				
 	}
 
