@@ -1,7 +1,7 @@
 import gps.GPSEngine;
 import gps.SearchStrategy;
 import gps.api.GPSProblem;
-import gps.api.impl.GPS0hN0Problem;
+import gps.api.impl.GPS0hN0Problem_allBlue;
 import gps.impl.GPS0hN0Engine;
 
 
@@ -15,7 +15,7 @@ public class Game0hN0Solver {
 			return;
 		}		
 		
-		GPSProblem problem = new GPS0hN0Problem();
+		GPSProblem problem = new GPS0hN0Problem_allBlue();
 		GPSEngine solver = new GPS0hN0Engine();
 		String searchStrategy = args[0];
 		

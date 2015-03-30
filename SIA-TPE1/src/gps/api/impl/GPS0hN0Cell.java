@@ -5,6 +5,7 @@ public class GPS0hN0Cell {
 
 	private int value = 0;
 	private boolean fixed = false;
+	private boolean completed = false;
 	private Color color = Color.white;
 	
 	public GPS0hN0Cell (int value, Color color, boolean fixed)
@@ -36,6 +37,14 @@ public class GPS0hN0Cell {
 	
 	public boolean isFixed(){
 		return fixed;
+	}
+	
+	public void complete(){
+		completed = true;
+	}
+	
+	public boolean isCompleted(){
+		return completed;
 	}
 
 }
