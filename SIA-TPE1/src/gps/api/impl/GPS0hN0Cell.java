@@ -46,5 +46,22 @@ public class GPS0hN0Cell {
 	public boolean isCompleted(){
 		return completed;
 	}
+	
+	@Override
+	public boolean equals(Object other){
+		
+		if(other == null){
+			return false;
+		}
+		
+		if(other.getClass() != GPS0hN0Cell.class){
+			return false;
+		}
+		
+		GPS0hN0Cell other_cell = (GPS0hN0Cell) other;
+		
+		return fixed != other_cell.isFixed() || color != other_cell.getColor() || value != other_cell.getValue();
+		
+	}
 
 }
