@@ -31,7 +31,7 @@ public abstract class GPS0hN0Rule implements GPSRule {
 	@Override
 	public GPSState evalRule(GPSState state) throws NotAppliableException {
 
-		GPS0hN0State auxState = (GPS0hN0State) state;
+		GPS0hN0State auxState = new GPS0hN0State(((GPS0hN0State) state).getBoard(),((GPS0hN0State) state).getCellsToCheck());
 
 		GPS0hN0Cell cellAt = auxState.getBoard()[i][j];
 
@@ -41,6 +41,7 @@ public abstract class GPS0hN0Rule implements GPSRule {
 
 		
 		auxState.getBoard()[i][j] = new GPS0hN0Cell(color);
+		
 
 		for (CellWrapper cell : auxState.getCellsToCheck()) {
 
