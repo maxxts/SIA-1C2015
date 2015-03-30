@@ -3,6 +3,7 @@ package gps.impl;
 import gps.GPSEngine;
 import gps.GPSNode;
 import gps.SearchStrategy;
+import gps.api.GPSState;
 
 public class GPS0hN0Engine extends GPSEngine {
 
@@ -20,15 +21,16 @@ public class GPS0hN0Engine extends GPSEngine {
 		
 		if (this.getStrategy().equals(SearchStrategy.DFS))
 		{
-			
-			if(this.getOpen().size() == 0){
+			int openSize = this.getOpen().size();
+			if(openSize == 0){
 				
 				this.getOpen().add(node);
 			
 			}else{
 				
 				int i = 0;
-				while (this.getOpen().get(i).getParent().equals(node.getParent()))
+				
+				while ( i < openSize && this.getOpen().get(i).getParent().equals(node.getParent()))
 				{
 					i++;
 				}
@@ -49,12 +51,13 @@ public class GPS0hN0Engine extends GPSEngine {
 			
 			// Search for parent, self or parent's brother in open list.
 			
+			GPSNode grandParent = node.getParent().getParent();
 			boolean parentIsOpen = false;
 			boolean nodeIsOpen = false;
 			boolean parentBrotherIsOpen = false;
-			int i = 0;
 			int lastParentBrotherIndex = 0;
-			
+			int i = 0;
+						
 			for (GPSNode aNode : this.getOpen())
 			{
 				if (node.getParent().equals(aNode))
@@ -65,7 +68,7 @@ public class GPS0hN0Engine extends GPSEngine {
 				{
 					nodeIsOpen = true;
 				}
-				if(node.getParent().getParent().equals(aNode.getParent()))
+				if(grandParent != null && grandParent.equals(aNode.getParent()))
 				{
 					parentBrotherIsOpen = true;
 					lastParentBrotherIndex = i;
