@@ -110,7 +110,7 @@ public class GPS0hN0State implements GPSState {
 			
 			for(int j = 0 ; j < GPS0hN0State.BOARD_SIZE ; j++){
 				
-				if(! board[i][j].equals(state_board[i][j])){
+				if( !(board[i][j].equals(state_board[i][j])) ){
 					return false;
 				}
 				
