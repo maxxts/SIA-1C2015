@@ -93,8 +93,31 @@ public class GPS0hN0State implements GPSState {
 
 	@Override
 	public boolean compare(GPSState state) {
-		// TODO Maldita Juli no quiere hacerlo.
-		return false;
+		
+		if(state == null){
+			return false;
+		}
+		
+		GPS0hN0State ohno_state = (GPS0hN0State) state;
+		
+		if(ohno_state.getBoard() == null){
+			return false;
+		}
+		
+		GPS0hN0Cell[][] state_board = ohno_state.getBoard();
+		
+		for(int i=0 ; i < GPS0hN0State.BOARD_SIZE ; i++ ){
+			
+			for(int j = 0 ; j < GPS0hN0State.BOARD_SIZE ; j++){
+				
+				if(board[i][j].isFixed() != state_board[i][j].isFixed() || board[i][j].getValue() != state_board[i][j].getValue() || board[i][j].getColor() != state_board[i][j].getColor()){
+					return false;
+				}
+				
+			}
+		}
+		
+		return true;
 	}
 	
 	public void prepareBoardForSearch(Color fillColor){
@@ -113,6 +136,7 @@ public class GPS0hN0State implements GPSState {
 	}
 
 	public void completeCell(CellWrapper cell){
+		
 		for(int i =0 ; i < cellsToCheck.size() ; i++){
 			
 			CellWrapper each = cellsToCheck.get(i);
