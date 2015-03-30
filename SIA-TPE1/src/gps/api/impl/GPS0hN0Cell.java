@@ -1,6 +1,6 @@
 package gps.api.impl;
 
-public class GPS0hN0Cell implements Cloneable{
+public class GPS0hN0Cell {
 	
 
 	private int value = 0;
@@ -64,8 +64,8 @@ public class GPS0hN0Cell implements Cloneable{
 		
 	}
 	
-	@Override
-	protected Object clone() throws CloneNotSupportedException {
+	
+	protected GPS0hN0Cell cloneCell(){
 		
 		return new GPS0hN0Cell(value,color,fixed);
 		
