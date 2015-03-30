@@ -85,15 +85,14 @@ public class GPS0hN0Engine extends GPSEngine {
 				else
 				{
 					this.getOpen().add(node.getParent());
-				}
-				
+				}				
 			}
 			
 			// If self node is not open, I add at the end of the list
 			if (!nodeIsOpen) 
 			{
 				this.getOpen().add(node);
-			}			
+			}		
 			
 		}
 				
