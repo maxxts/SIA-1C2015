@@ -134,11 +134,43 @@ public class GPS0hN0Engine extends GPSEngine {
 		
 		if(this.getStrategy().equals(SearchStrategy.AStar))
 		{
+			if(this.getOpen().size() == 0){
+				this.getOpen().add(node);
+				return;
+			}
 			
+			int i = 0;
+			int hValue = this.getProblem().getHValue(node.getState());
+			int fValue = hValue + node.getCost();
+			
+			while ( i < this.getOpen().size() )
+			{
+				GPSNode	other = this.getOpen().get(i);
+				
+				int fValueOther = this.getProblem().getHValue(other.getState()) + other.getCost();
+				
+				if(fValue == fValueOther){
+					if(hValue < this.getProblem().getHValue(other.getState())){
+						this.getOpen().add(i, node);
+						return;
+					}
+				} else {
+					if(fValue < fValueOther){
+						this.getOpen().add(i, node);
+						return;
+				}
+				
+				i++;
+			}
+			
+			this.getOpen().add(node);
 		}
 		
 		
 				
+	}
+	
+	
 	}
 
 }
