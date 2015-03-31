@@ -77,21 +77,21 @@ public abstract class GPS0hN0Rule implements GPSRule {
 				complete++;
 
 			} else {
+				if (!isAppliable(visibleCells, newCell.getCell().getValue())) {
+					throw new NotAppliableException();
+				}
 
+				CellWrapper prevCell = ((GPS0hN0State) state).getCellsToCheck()
+						.get(i);
+
+				if (newCell.getCell().isCompleted() != prevCell.getCell()
+						.isCompleted()) {
+					System.out.println("SE RECHAZA POR NUEVA CONDICION");
+					throw new NotAppliableException();
+				}
 			}
 
-			if (!isAppliable(visibleCells, newCell.getCell().getValue())) {
-				throw new NotAppliableException();
-			}
-
-			CellWrapper prevCell = ((GPS0hN0State) state).getCellsToCheck()
-					.get(i);
-
-			if (newCell.getCell().isCompleted() != prevCell.getCell()
-					.isCompleted()) {
-				System.out.println("SE RECHAZA POR NUEVA CONDICION");
-				throw new NotAppliableException();
-			}
+			
 
 		}
 
