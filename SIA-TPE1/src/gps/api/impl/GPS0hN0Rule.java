@@ -55,7 +55,7 @@ public abstract class GPS0hN0Rule implements GPSRule {
 			}
 			
 			
-			System.out.println("Cell in: (" + cell.getI() + " ," + cell.getJ() + ") >> " + visibleCells + " of " + cell.getCell().getValue() + " " + cell.getCell().isCompleted());
+			System.out.println("FixedCell: (" + cell.getI() + " , " + cell.getJ() + ") >>\t" + cell.getCell().isCompleted());
 		}
 
 		return auxState;
