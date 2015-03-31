@@ -295,14 +295,24 @@ public class GPS0hN0State implements GPSState {
 			
 			if(each.getI() == cell.getI() && each.getJ() == cell.getJ()){
 				each.getCell().complete();
-				completeCells++;
 				return;
 			}
 		}
 	}
 	
 	public int getCompleteCells(){
-		return completeCells;
+		//return completeCells;
+		
+		int complete = 0;
+		
+		for(CellWrapper cell: cellsToCheck){
+			if(cell.getCell().isCompleted()){
+				complete++;
+			}
+		}
+		
+		return complete;
+				
 	}
 	
 	public void setComplete(int complete){
