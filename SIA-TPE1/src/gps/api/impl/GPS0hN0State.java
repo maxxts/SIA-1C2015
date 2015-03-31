@@ -10,8 +10,8 @@ public class GPS0hN0State implements GPSState {
 	private GPS0hN0Cell[][] board;
 	private List<CellWrapper> cellsToCheck;
 	
-	//public static int BOARD_SIZE = 7;
-	public static int BOARD_SIZE = 5;
+	public static int BOARD_SIZE = 7;
+	//public static int BOARD_SIZE = 5;
 	
 	public GPS0hN0State(GPS0hN0Cell[][] board, List<CellWrapper> initCells) {
 		this.board = board;
@@ -25,7 +25,7 @@ public class GPS0hN0State implements GPSState {
 		board = new GPS0hN0Cell[BOARD_SIZE][BOARD_SIZE];
 		cellsToCheck = new ArrayList<CellWrapper>();
 		
-		
+		/*
 		//Para probar:
 		board[0][0] = new GPS0hN0Cell(2, Color.blue, true);
 		cellsToCheck.add(new CellWrapper(0,0,board[0][0]));
@@ -53,10 +53,10 @@ public class GPS0hN0State implements GPSState {
 
 		
 		board[4][4] = new GPS0hN0Cell(0, Color.red, true);
-
+		*/
 		
 		
-		/*board[0][1] = new GPS0hN0Cell(3,Color.blue,true);
+		board[0][1] = new GPS0hN0Cell(3,Color.blue,true);
 		cellsToCheck.add(new CellWrapper(0,1,board[0][1]));
 		
 		board[0][6] = new GPS0hN0Cell(4,Color.blue,true);
@@ -101,7 +101,7 @@ public class GPS0hN0State implements GPSState {
 		board[6][6] = new GPS0hN0Cell(5, Color.blue, true);
 		cellsToCheck.add(new CellWrapper(6,6,board[6][6]));
 		
-		board[3][6] = new GPS0hN0Cell(0, Color.red, true);*/
+		board[3][6] = new GPS0hN0Cell(0, Color.red, true);
 		
 	}
 	
@@ -124,6 +124,42 @@ public class GPS0hN0State implements GPSState {
 		
 	}
 	
+	@Override
+	public String toString(){
+		
+		String newLine = "\r\n ";
+		String stateStr = "- : Blue cell with no value | X : Red cell not fixed | Number: Value of cell (0 : red fixed cell) ";
+		stateStr += newLine;
+		
+		
+		for(int i = 0 ; i < BOARD_SIZE ; i++)
+		{	
+			for(int j = 0 ; j < BOARD_SIZE ; j++)
+			{
+				
+				GPS0hN0Cell cell = this.board[i][j];
+				if (cell.isFixed()){
+					
+					stateStr += " " + cell.getValue() + " ";
+				}
+				else
+				{
+					if (cell.getColor() == Color.blue){
+						stateStr += " - ";	
+					}
+					else if (cell.getColor() == Color.red)
+					{
+						stateStr += " X ";
+					}			
+				}
+			}
+			
+			stateStr += newLine;
+
+		}
+		
+		return stateStr;
+	}
 	
 	public void printStateForDebug(){
 			

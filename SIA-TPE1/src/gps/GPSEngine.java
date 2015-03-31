@@ -21,6 +21,8 @@ public abstract class GPSEngine {
 
 	// Use this variable in the addNode implementation
 	private SearchStrategy strategy;
+	
+	private int generatedCOunter = 0;
 
 	public void engine(GPSProblem myProblem, SearchStrategy myStrategy) {
 
@@ -28,6 +30,9 @@ public abstract class GPSEngine {
 		setStrategy(myStrategy);
 
 		GPSNode rootNode = new GPSNode(problem.getInitState(), 0);
+		generatedCOunter++;
+		
+		long startTime = System.currentTimeMillis();
 		boolean finished = false;
 		boolean failed = false;
 		long explosionCounter = 0;
@@ -44,9 +49,15 @@ public abstract class GPSEngine {
 				closed.add(currentNode);
 				open.remove(0);
 				if (problem.isGoal(currentNode.getState())) {
+					long endTime = System.currentTimeMillis();
 					finished = true;
+					System.out.println("Solution board");
 					System.out.println(currentNode.getSolution());
+					System.out.println("Depth: " + currentNode.getCost());
+					System.out.println("Execution time: " + (endTime - startTime) + " milliseconds");
+					System.out.println("Generated nodes: " + generatedCOunter);
 					System.out.println("Expanded nodes: " + explosionCounter);
+					System.out.println("Border nodes: " + open.size());
 				} else {
 					explosionCounter++;
 					explode(currentNode);
@@ -82,6 +93,7 @@ public abstract class GPSEngine {
 						+ rule.getCost());
 				newNode.setParent(node);
 				addNode(newNode);
+				generatedCOunter++;
 			}
 		}
 		return true;
