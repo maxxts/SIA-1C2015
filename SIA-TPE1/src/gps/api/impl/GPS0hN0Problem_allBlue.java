@@ -103,4 +103,9 @@ public class GPS0hN0Problem_allBlue extends GPS0hN0Problem {
 		return intersections;
 	}
 
+	@Override
+	public Color getColorToFill() {
+		return Color.blue;
+	}
+
 }

@@ -55,5 +55,28 @@ public abstract class GPS0hN0Problem implements GPSProblem{
 	
 	public abstract Integer getHValueImpl(GPSState state);
 	
+	public GPS0hN0State prepareBoardForSearch(GPS0hN0State state){
+		
+		GPS0hN0Cell[][] board = state.getBoard();
+		
+		Color color = getColorToFill();
+		
+		for(int i=0 ; i < GPS0hN0State.BOARD_SIZE ; i++){
+			for(int j = 0 ; j < GPS0hN0State.BOARD_SIZE ; j++){
+				
+				GPS0hN0Cell cell = board[i][j];
+				
+				if(cell == null){
+					board[i][j] = new GPS0hN0Cell(color);
+				}
+				
+			}
+		}
+		
+		return state;
+	}
+	
+	public abstract Color getColorToFill();
+	
 
 }

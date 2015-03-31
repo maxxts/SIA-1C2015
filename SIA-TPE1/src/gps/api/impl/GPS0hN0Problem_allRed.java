@@ -24,6 +24,11 @@ public class GPS0hN0Problem_allRed extends GPS0hN0Problem{
 		
 	}
 
+	@Override
+	public Color getColorToFill() {
+		return Color.red;
+	}
+
 
 
 }

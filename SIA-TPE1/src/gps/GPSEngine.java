@@ -4,6 +4,7 @@ import gps.api.GPSProblem;
 import gps.api.GPSRule;
 import gps.api.GPSState;
 import gps.api.impl.Color;
+import gps.api.impl.GPS0hN0Problem;
 import gps.api.impl.GPS0hN0State;
 import gps.exception.NotAppliableException;
 
@@ -37,8 +38,7 @@ public abstract class GPSEngine {
 		boolean failed = false;
 		long explosionCounter = 0;
 		
-		// We fill the blanks with blue cells to beforehand
-		((GPS0hN0State) rootNode.getState()).prepareBoardForSearch(Color.blue);
+		((GPS0hN0Problem) problem).prepareBoardForSearch((GPS0hN0State) rootNode.getState());
 		
 		open.add(rootNode);
 		while (!failed && !finished) {
