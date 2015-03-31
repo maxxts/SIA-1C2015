@@ -11,8 +11,9 @@ public class GPS0hN0State implements GPSState {
 	private List<CellWrapper> cellsToCheck;
 	private int completeCells = 0;
 	
-	public static int BOARD_SIZE = 7;
+	//public static int BOARD_SIZE = 7;
 	//public static int BOARD_SIZE = 5;
+	public static int BOARD_SIZE = 6;
 	
 	public GPS0hN0State(GPS0hN0Cell[][] board, List<CellWrapper> initCells, int completeCells) {
 		this.board = board;
@@ -57,6 +58,7 @@ public class GPS0hN0State implements GPSState {
 				board[4][4] = new GPS0hN0Cell(0, Color.red, true);*/
 				
 				//Tablero de 7x7 (Max)
+				/*
 				board[0][0] = new GPS0hN0Cell(1,Color.blue,true);
 				cellsToCheck.add(new CellWrapper(0,0,board[0][0]));
 				
@@ -102,6 +104,47 @@ public class GPS0hN0State implements GPSState {
 				board[4][2] = new GPS0hN0Cell(0, Color.red, true);
 				
 				board[5][3] = new GPS0hN0Cell(0, Color.red, true);
+				*/
+		
+		// TABLERO DE 6X6	
+		board[0][1] = new GPS0hN0Cell(1,Color.blue,true);
+		cellsToCheck.add(new CellWrapper(0,1,board[0][1]));
+		
+		board[0][3] = new GPS0hN0Cell(1,Color.blue,true);
+		cellsToCheck.add(new CellWrapper(0,3,board[0][3]));
+		
+		board[0][5] = new GPS0hN0Cell(1,Color.blue,true);
+		cellsToCheck.add(new CellWrapper(0,5,board[0][5]));
+		
+		board[1][0] = new GPS0hN0Cell(1, Color.blue, true);
+		cellsToCheck.add(new CellWrapper(1,0,board[1][0]));
+		
+		board[1][5] = new GPS0hN0Cell(3,Color.blue,true);
+		cellsToCheck.add(new CellWrapper(1,5,board[1][5]));
+		
+		board[3][0] = new GPS0hN0Cell(3, Color.blue, true);
+		cellsToCheck.add(new CellWrapper(3,0,board[3][0]));
+		
+		board[3][1] = new GPS0hN0Cell(2, Color.blue, true);
+		cellsToCheck.add(new CellWrapper(3,1,board[3][1]));
+		
+		board[3][0] = new GPS0hN0Cell(5, Color.blue, true);
+		cellsToCheck.add(new CellWrapper(3,0,board[3][0]));
+		
+		board[3][3] = new GPS0hN0Cell(4, Color.blue, true);
+		cellsToCheck.add(new CellWrapper(3,3,board[3][3]));
+		
+		board[4][2] = new GPS0hN0Cell(5, Color.blue, true);
+		cellsToCheck.add(new CellWrapper(4,2,board[4][2]));
+		
+		board[4][3] = new GPS0hN0Cell(6, Color.blue, true);
+		cellsToCheck.add(new CellWrapper(4,3,board[4][3]));
+					
+		board[0][0] = new GPS0hN0Cell(0, Color.red, true);
+		
+		board[2][4] = new GPS0hN0Cell(0, Color.red, true);
+		
+		board[5][4] = new GPS0hN0Cell(0, Color.red, true);
 				
 				
 				
