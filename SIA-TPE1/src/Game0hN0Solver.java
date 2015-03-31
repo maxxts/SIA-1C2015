@@ -37,6 +37,12 @@ public class Game0hN0Solver {
 			System.out.println("Initializing " + SearchStrategy.BFS.toString() + " search...");
 			solver.engine(problem, SearchStrategy.BFS);
 		}
+		
+		if (searchStrategy.equalsIgnoreCase(SearchStrategy.AStar.toString()))
+		{
+			System.out.println("Initializing " + SearchStrategy.AStar.toString() + " search...");
+			solver.engine(problem, SearchStrategy.AStar);
+		}
 	}
 
 }

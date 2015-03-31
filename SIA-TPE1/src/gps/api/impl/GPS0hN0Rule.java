@@ -18,7 +18,6 @@ public abstract class GPS0hN0Rule implements GPSRule {
 
 	@Override
 	public Integer getCost() {
-		// TODO Florcha, haceme.
 		return 1;
 	}
 
@@ -41,9 +40,11 @@ public abstract class GPS0hN0Rule implements GPSRule {
 
 		auxState.getBoard()[i][j] = new GPS0hN0Cell(color);
 
+		auxState.printStateForDebug();
 		for (CellWrapper cell : auxState.getCellsToCheck()) {
 
 			int visibleCells = visibleCells(cell, auxState.getBoard());
+			
 
 			if (visibleCells == cell.getCell().getValue()) {
 
@@ -52,12 +53,16 @@ public abstract class GPS0hN0Rule implements GPSRule {
 			} else if (!isAppliable(visibleCells, cell.getCell().getValue())) {
 				throw new NotAppliableException();
 			}
-
+			
+			
+			System.out.println("Cell in: (" + cell.getI() + " ," + cell.getJ() + ") >> " + visibleCells + " of " + cell.getCell().getValue() + " " + cell.getCell().isCompleted());
 		}
 
 		return auxState;
 
 	}
+	
+	
 
 	public abstract boolean isAppliable(int visibleCells, int cellValue);
 

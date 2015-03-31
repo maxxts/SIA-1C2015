@@ -160,11 +160,11 @@ public class GPS0hN0Engine extends GPSEngine {
 						return;
 				}
 				
-				i++;
 			}
+				i++;
 			
-			this.getOpen().add(node);
 		}
+		this.getOpen().add(node);
 		
 		
 				
