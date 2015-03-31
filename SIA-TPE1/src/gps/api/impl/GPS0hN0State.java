@@ -10,8 +10,8 @@ public class GPS0hN0State implements GPSState {
 	private GPS0hN0Cell[][] board;
 	private List<CellWrapper> cellsToCheck;
 	
-	//public static int BOARD_SIZE = 7;
-	public static int BOARD_SIZE = 5;
+	public static int BOARD_SIZE = 7;
+	//public static int BOARD_SIZE = 5;
 	
 	public GPS0hN0State(GPS0hN0Cell[][] board, List<CellWrapper> initCells) {
 		this.board = board;
