@@ -9,13 +9,15 @@ public class GPS0hN0State implements GPSState {
 	
 	private GPS0hN0Cell[][] board;
 	private List<CellWrapper> cellsToCheck;
+	private int completeCells = 0;
 	
 	public static int BOARD_SIZE = 7;
 	//public static int BOARD_SIZE = 5;
 	
-	public GPS0hN0State(GPS0hN0Cell[][] board, List<CellWrapper> initCells) {
+	public GPS0hN0State(GPS0hN0Cell[][] board, List<CellWrapper> initCells, int completeCells) {
 		this.board = board;
 		this.cellsToCheck = initCells;
+		this.completeCells = completeCells;
 	}
 	
 	
@@ -117,11 +119,11 @@ public class GPS0hN0State implements GPSState {
 			}
 		}
 		
-		for(CellWrapper cell: cellsToCheck){
-			cellsToCheck_clone.add(cell.clone());
+		for(CellWrapper each: this.cellsToCheck){
+			cellsToCheck_clone.add(each.clone());
 		}
 		
-		return new GPS0hN0State(board_clone, cellsToCheck_clone);
+		return new GPS0hN0State(board_clone, cellsToCheck_clone,completeCells);
 		
 	}
 	
@@ -250,10 +252,20 @@ public class GPS0hN0State implements GPSState {
 			
 			if(each.getI() == cell.getI() && each.getJ() == cell.getJ()){
 				each.getCell().complete();
+				completeCells++;
 				return;
 			}
 		}
 	}
+	
+	public int getCompleteCells(){
+		return completeCells;
+	}
+	
+	public void setComplete(int complete){
+		completeCells = complete;
+	}
+
 
 	
 	

@@ -15,14 +15,16 @@ public class GPS0hN0Problem_allBlue extends GPS0hN0Problem {
 
 		GPS0hN0State ohno_state = (GPS0hN0State) state;
 
-		int unComplete = 0;
+		//int unComplete = 0;
 
-		for (CellWrapper cell : ohno_state.getCellsToCheck()) {
+		/*for (CellWrapper cell : ohno_state.getCellsToCheck()) {
 			if (!cell.getCell().isCompleted()) {
 				unComplete++;
 			}
-		}
+		}*/
 
+		int unComplete = ohno_state.getCellsToCheck().size() - ohno_state.getCompleteCells();
+		
 		if (unComplete == 1) {
 			return 1;
 		}

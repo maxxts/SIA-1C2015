@@ -40,7 +40,11 @@ public abstract class GPS0hN0Rule implements GPSRule {
 
 		auxState.getBoard()[i][j] = new GPS0hN0Cell(color);
 
-		auxState.printStateForDebug();
+		int complete = 0;
+		
+		String fixedCells = "";
+		
+		//auxState.printStateForDebug();
 		for (CellWrapper cell : auxState.getCellsToCheck()) {
 
 			int visibleCells = visibleCells(cell, auxState.getBoard());
@@ -49,15 +53,18 @@ public abstract class GPS0hN0Rule implements GPSRule {
 			if (visibleCells == cell.getCell().getValue()) {
 
 				auxState.completeCell(cell);
+				complete++;
 
 			} else if (!isAppliable(visibleCells, cell.getCell().getValue())) {
 				throw new NotAppliableException();
 			}
 			
-			
-			System.out.println("FixedCell: (" + cell.getI() + " , " + cell.getJ() + ") >>\t" + cell.getCell().isCompleted());
+			fixedCells += "FixedCell: (" + cell.getI() + " , " + cell.getJ() + ") >>\t" + cell.getCell().isCompleted() + "\r\n ";
+			//System.out.println("FixedCell: (" + cell.getI() + " , " + cell.getJ() + ") >>\t" + cell.getCell().isCompleted());
 		}
-
+		
+		System.out.println(fixedCells);
+		auxState.setComplete(complete);
 		return auxState;
 
 	}

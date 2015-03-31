@@ -21,15 +21,23 @@ public abstract class GPS0hN0Problem implements GPSProblem{
 		
 		List<CellWrapper> cellsToCheck = ohno_state.getCellsToCheck();
 		
-		for(CellWrapper cell : cellsToCheck){
+		/*for(CellWrapper cell : cellsToCheck){
 			if(!cell.getCell().isCompleted()){
 				return false;
 			}
 			
 		}
 		
-		
 		return true;
+		
+		*/
+		
+		if(ohno_state.getCompleteCells() == cellsToCheck.size()){
+			return true;
+		}
+		
+		return false;
+		
 	}
 
 	@Override
