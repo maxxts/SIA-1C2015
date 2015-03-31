@@ -30,6 +30,8 @@ public abstract class GPS0hN0Rule implements GPSRule {
 	@Override
 	public GPSState evalRule(GPSState state) throws NotAppliableException {
 
+		int completeCells_original = ((GPS0hN0State) state).getCompleteCells();
+		
 		GPS0hN0State auxState = ((GPS0hN0State) state).cloneState();
 
 		GPS0hN0Cell cellAt = auxState.getBoard()[i][j];
@@ -63,8 +65,13 @@ public abstract class GPS0hN0Rule implements GPSRule {
 			//System.out.println("FixedCell: (" + cell.getI() + " , " + cell.getJ() + ") >>\t" + cell.getCell().isCompleted());
 		}
 		
-		System.out.println(fixedCells);
 		auxState.setComplete(complete);
+		
+		if(completeCells_original > complete){
+			throw new NotAppliableException();
+		}
+		
+		System.out.println(fixedCells);
 		return auxState;
 
 	}
