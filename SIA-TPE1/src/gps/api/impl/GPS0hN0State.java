@@ -31,13 +31,11 @@ public class GPS0hN0State implements GPSState {
 		cellsToCheck.add(new CellWrapper(0,0,board[0][0]));
 		
 		board[0][2] = new GPS0hN0Cell(0, Color.red, true);
-		cellsToCheck.add(new CellWrapper(0,2,board[0][2]));
 		
 		board[1][1] = new GPS0hN0Cell(1, Color.blue, true);
 		cellsToCheck.add(new CellWrapper(1,1,board[1][1]));
 		
 		board[1][3] = new GPS0hN0Cell(0, Color.red, true);
-		cellsToCheck.add(new CellWrapper(1,3,board[1][3]));
 		
 		board[2][2] = new GPS0hN0Cell(3, Color.blue, true);
 		cellsToCheck.add(new CellWrapper(2,2,board[2][2]));
@@ -52,10 +50,10 @@ public class GPS0hN0State implements GPSState {
 		cellsToCheck.add(new CellWrapper(4,0,board[4][0]));
 		
 		board[4][3] = new GPS0hN0Cell(0, Color.red, true);
-		cellsToCheck.add(new CellWrapper(4,3,board[4][3]));
+
 		
 		board[4][4] = new GPS0hN0Cell(0, Color.red, true);
-		cellsToCheck.add(new CellWrapper(4,4,board[4][4]));
+
 		
 		
 		/*board[0][1] = new GPS0hN0Cell(3,Color.blue,true);
