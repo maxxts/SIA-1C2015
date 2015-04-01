@@ -17,6 +17,9 @@ public class GPS0hN0Cell {
 
 	public GPS0hN0Cell(Color color) {
 		this.color = color;
+		value = 0;
+		fixed = false;
+		completed = false;
 	}
 
 	public int getValue() {

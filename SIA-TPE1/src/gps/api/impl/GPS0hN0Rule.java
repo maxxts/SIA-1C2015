@@ -30,79 +30,51 @@ public abstract class GPS0hN0Rule implements GPSRule {
 	@Override
 	public GPSState evalRule(GPSState state) throws NotAppliableException {
 
-		int completeCells_original = ((GPS0hN0State) state).getCompleteCells();
-
-		GPS0hN0State auxState = ((GPS0hN0State) state).cloneState();
-
-		GPS0hN0Cell cellAt = auxState.getBoard()[i][j];
-
-		if (cellAt.isFixed() || cellAt.getColor() == color) {
+		GPS0hN0State cloned_state = ((GPS0hN0State) state).cloneState();
+		
+		GPS0hN0Cell cell = cloned_state.getBoard()[i][j];
+		
+		if(cell.isFixed() || cell.getColor().equals(color)){
+			System.out.println("RECHAZO");
 			throw new NotAppliableException();
 		}
-
-		auxState.getBoard()[i][j] = new GPS0hN0Cell(color);
-
+		
+		cloned_state.getBoard()[i][j] = new GPS0hN0Cell(color);
+		
 		int complete = 0;
 		
-		// TODO Esto hay que volarlo? 
-		String fixedCells = "";
-		/*
-		 * // for (CellWrapper cell : auxState.getCellsToCheck()) {
-		 * 
-		 * int visibleCells = visibleCells(cell, auxState.getBoard());
-		 * 
-		 * 
-		 * if (visibleCells == cell.getCell().getValue()) {
-		 * 
-		 * auxState.completeCell(cell); complete++;
-		 * 
-		 * } else if (!isAppliable(visibleCells, cell.getCell().getValue())) {
-		 * System.out.println("NO APLICA"); throw new NotAppliableException(); }
-		 * 
-		 * //fixedCells += "FixedCell: (" + cell.getI() + " , " + cell.getJ() +
-		 * ") >>\t" + cell.getCell().isCompleted() + "\r\n ";
-		 * //System.out.println("FixedCell: (" + cell.getI() + " , " +
-		 * cell.getJ() + ") >>\t" + cell.getCell().isCompleted()); }
-		 */
-
-		for (int i = 0; i < auxState.getCellsToCheck().size(); i++) {
-
-			CellWrapper newCell = auxState.getCellsToCheck().get(i);
-
-			int visibleCells = visibleCells(newCell, auxState.getBoard());
-
-			if (visibleCells == newCell.getCell().getValue()) {
-
-				auxState.completeCell(newCell);
+		for(int index = 0 ; index < cloned_state.getCellsToCheck().size() ; index++){
+			
+			CellWrapper current = cloned_state.getCellsToCheck().get(index);
+			
+			int canSee = visibleCells(current,cloned_state.getBoard());
+			
+			if(canSee == current.getCell().getValue()){
+				current.getCell().complete();
 				complete++;
-
 			} else {
-				if (!isAppliable(visibleCells, newCell.getCell().getValue())) {
+				
+				GPS0hN0State parent = (GPS0hN0State) state;
+				
+				if( !isAppliable(canSee,current.getCell().getValue())){
+					System.out.println("No aplica porque una celda ve de menos");
 					throw new NotAppliableException();
 				}
-
-				CellWrapper prevCell = ((GPS0hN0State) state).getCellsToCheck().get(i);
-
-				if (newCell.getCell().isCompleted() != prevCell.getCell()
-						.isCompleted()) {
+				
+				if(parent.getCellsToCheck().get(index).getCell().isCompleted()){
+					System.out.println("No aplica porque se descompleto una celda");
+					throw new NotAppliableException();
+				}
+				
+				if(complete < parent.getCompleteCells()){
+					System.out.println("No aplica porque hay menos celdas completas");
 					throw new NotAppliableException();
 				}
 			}
-
 			
-
 		}
 		
-		if (completeCells_original > complete) {
-			throw new NotAppliableException();
-		}
-		
-		auxState.setComplete(complete);
-		
-		// TODO Para debug... Hay que volarlo al final de todo
-		auxState.printStateForDebug();
-		
-		return auxState;
+		return cloned_state;
 
 	}
 
