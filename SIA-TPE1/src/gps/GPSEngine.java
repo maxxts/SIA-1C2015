@@ -3,7 +3,6 @@ package gps;
 import gps.api.GPSProblem;
 import gps.api.GPSRule;
 import gps.api.GPSState;
-import gps.api.impl.Color;
 import gps.api.impl.GPS0hN0Problem;
 import gps.api.impl.GPS0hN0State;
 import gps.exception.NotAppliableException;

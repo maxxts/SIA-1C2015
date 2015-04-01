@@ -3,7 +3,6 @@ package gps.impl;
 import gps.GPSEngine;
 import gps.GPSNode;
 import gps.SearchStrategy;
-import gps.api.GPSState;
 
 public class GPS0hN0Engine extends GPSEngine {
 

@@ -176,7 +176,6 @@ public class GPS0hN0State implements GPSState {
 		String newLine = "\r\n ";
 		String stateStr = "B : Blue not fixed | R : Red not fixed | Number: Blue fixed | X: Red fixed ";
 		stateStr += newLine;
-		stateStr += newLine;
 		
 		
 		for(int i = 0 ; i < BOARD_SIZE ; i++)

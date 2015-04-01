@@ -35,7 +35,6 @@ public abstract class GPS0hN0Rule implements GPSRule {
 		GPS0hN0Cell cell = cloned_state.getBoard()[i][j];
 		
 		if(cell.isFixed() || cell.getColor().equals(color)){
-			System.out.println("RECHAZO");
 			throw new NotAppliableException();
 		}
 		
@@ -57,17 +56,14 @@ public abstract class GPS0hN0Rule implements GPSRule {
 				GPS0hN0State parent = (GPS0hN0State) state;
 				
 				if( !isAppliable(canSee,current.getCell().getValue())){
-					System.out.println("No aplica porque una celda ve de menos");
 					throw new NotAppliableException();
 				}
 				
 				if(parent.getCellsToCheck().get(index).getCell().isCompleted()){
-					System.out.println("No aplica porque se descompleto una celda");
 					throw new NotAppliableException();
 				}
 				
 				if(complete < parent.getCompleteCells()){
-					System.out.println("No aplica porque hay menos celdas completas");
 					throw new NotAppliableException();
 				}
 			}
