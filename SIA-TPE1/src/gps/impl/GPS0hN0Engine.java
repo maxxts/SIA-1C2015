@@ -10,11 +10,6 @@ public class GPS0hN0Engine extends GPSEngine {
 	@Override
 	public void addNode(GPSNode node) {
 
-		// System.out.println("Executing " + this.getStrategy().toString() +
-		// " addNode step...");
-
-		// TODO: Ver de sacar el caso base
-
 		if (this.getStrategy().equals(SearchStrategy.BFS)) {
 			this.getOpen().add(node);
 		}

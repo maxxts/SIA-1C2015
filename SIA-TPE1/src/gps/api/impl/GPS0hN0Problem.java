@@ -8,7 +8,7 @@ import gps.api.GPSRule;
 import gps.api.GPSState;
 
 public abstract class GPS0hN0Problem implements GPSProblem{
-
+	
 	@Override
 	public GPSState getInitState() {
 		return new GPS0hN0State();

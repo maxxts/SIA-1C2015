@@ -10,17 +10,19 @@ public class GPS0hN0State implements GPSState {
 	private GPS0hN0Cell[][] board;
 	private List<CellWrapper> cellsToCheck;
 	private int completeCells = 0;
-	
-	//public static int BOARD_SIZE = 7;
-	//public static int BOARD_SIZE = 5;
-	public static int BOARD_SIZE = 6;
-	
+		
+	public static int BOARD_SIZE = 7;
+		
 	public GPS0hN0State(GPS0hN0Cell[][] board, List<CellWrapper> initCells, int completeCells) {
 		this.board = board;
 		this.cellsToCheck = initCells;
 		this.completeCells = completeCells;
 	}
 	
+	// For debug proposes
+	public static void changeSize(int size){
+		BOARD_SIZE = size;
+	}
 	
 	//Returns a state initialized
 	public GPS0hN0State(){
@@ -28,10 +30,9 @@ public class GPS0hN0State implements GPSState {
 		board = new GPS0hN0Cell[BOARD_SIZE][BOARD_SIZE];
 		cellsToCheck = new ArrayList<CellWrapper>();
 		
-		
-		//Para probar:
-		
-				/*board[0][0] = new GPS0hN0Cell(2, Color.blue, true);
+		switch(BOARD_SIZE){
+			case 5:
+				board[0][0] = new GPS0hN0Cell(2, Color.blue, true);
 				cellsToCheck.add(new CellWrapper(0,0,board[0][0]));
 				
 				board[0][2] = new GPS0hN0Cell(0, Color.red, true);
@@ -55,10 +56,51 @@ public class GPS0hN0State implements GPSState {
 				
 				board[4][3] = new GPS0hN0Cell(0, Color.red, true);
 
-				board[4][4] = new GPS0hN0Cell(0, Color.red, true);*/
+				board[4][4] = new GPS0hN0Cell(0, Color.red, true);
+				break;
+			
+			case 6:
+				board[0][1] = new GPS0hN0Cell(1,Color.blue,true);
+				cellsToCheck.add(new CellWrapper(0,1,board[0][1]));
 				
-				//Tablero de 7x7 (Max)
-				/*
+				board[0][3] = new GPS0hN0Cell(1,Color.blue,true);
+				cellsToCheck.add(new CellWrapper(0,3,board[0][3]));
+				
+				board[0][5] = new GPS0hN0Cell(1,Color.blue,true);
+				cellsToCheck.add(new CellWrapper(0,5,board[0][5]));
+				
+				board[1][0] = new GPS0hN0Cell(1, Color.blue, true);
+				cellsToCheck.add(new CellWrapper(1,0,board[1][0]));
+				
+				board[1][5] = new GPS0hN0Cell(3,Color.blue,true);
+				cellsToCheck.add(new CellWrapper(1,5,board[1][5]));
+				
+				board[3][0] = new GPS0hN0Cell(3, Color.blue, true);
+				cellsToCheck.add(new CellWrapper(3,0,board[3][0]));
+				
+				board[3][1] = new GPS0hN0Cell(2, Color.blue, true);
+				cellsToCheck.add(new CellWrapper(3,1,board[3][1]));
+				
+				board[3][0] = new GPS0hN0Cell(5, Color.blue, true);
+				cellsToCheck.add(new CellWrapper(3,0,board[3][0]));
+				
+				board[3][3] = new GPS0hN0Cell(4, Color.blue, true);
+				cellsToCheck.add(new CellWrapper(3,3,board[3][3]));
+				
+				board[4][2] = new GPS0hN0Cell(5, Color.blue, true);
+				cellsToCheck.add(new CellWrapper(4,2,board[4][2]));
+				
+				board[4][3] = new GPS0hN0Cell(6, Color.blue, true);
+				cellsToCheck.add(new CellWrapper(4,3,board[4][3]));
+							
+				board[0][0] = new GPS0hN0Cell(0, Color.red, true);
+				
+				board[2][4] = new GPS0hN0Cell(0, Color.red, true);
+				
+				board[5][4] = new GPS0hN0Cell(0, Color.red, true);
+				break;
+			
+			case 7:
 				board[0][0] = new GPS0hN0Cell(1,Color.blue,true);
 				cellsToCheck.add(new CellWrapper(0,0,board[0][0]));
 				
@@ -104,51 +146,9 @@ public class GPS0hN0State implements GPSState {
 				board[4][2] = new GPS0hN0Cell(0, Color.red, true);
 				
 				board[5][3] = new GPS0hN0Cell(0, Color.red, true);
-				*/
+				break;
 		
-		// TABLERO DE 6X6	
-		board[0][1] = new GPS0hN0Cell(1,Color.blue,true);
-		cellsToCheck.add(new CellWrapper(0,1,board[0][1]));
-		
-		board[0][3] = new GPS0hN0Cell(1,Color.blue,true);
-		cellsToCheck.add(new CellWrapper(0,3,board[0][3]));
-		
-		board[0][5] = new GPS0hN0Cell(1,Color.blue,true);
-		cellsToCheck.add(new CellWrapper(0,5,board[0][5]));
-		
-		board[1][0] = new GPS0hN0Cell(1, Color.blue, true);
-		cellsToCheck.add(new CellWrapper(1,0,board[1][0]));
-		
-		board[1][5] = new GPS0hN0Cell(3,Color.blue,true);
-		cellsToCheck.add(new CellWrapper(1,5,board[1][5]));
-		
-		board[3][0] = new GPS0hN0Cell(3, Color.blue, true);
-		cellsToCheck.add(new CellWrapper(3,0,board[3][0]));
-		
-		board[3][1] = new GPS0hN0Cell(2, Color.blue, true);
-		cellsToCheck.add(new CellWrapper(3,1,board[3][1]));
-		
-		board[3][0] = new GPS0hN0Cell(5, Color.blue, true);
-		cellsToCheck.add(new CellWrapper(3,0,board[3][0]));
-		
-		board[3][3] = new GPS0hN0Cell(4, Color.blue, true);
-		cellsToCheck.add(new CellWrapper(3,3,board[3][3]));
-		
-		board[4][2] = new GPS0hN0Cell(5, Color.blue, true);
-		cellsToCheck.add(new CellWrapper(4,2,board[4][2]));
-		
-		board[4][3] = new GPS0hN0Cell(6, Color.blue, true);
-		cellsToCheck.add(new CellWrapper(4,3,board[4][3]));
-					
-		board[0][0] = new GPS0hN0Cell(0, Color.red, true);
-		
-		board[2][4] = new GPS0hN0Cell(0, Color.red, true);
-		
-		board[5][4] = new GPS0hN0Cell(0, Color.red, true);
-				
-				
-				
-		
+		}		
 	}
 	
 	public GPS0hN0State cloneState(){
@@ -174,7 +174,8 @@ public class GPS0hN0State implements GPSState {
 	public String toString(){
 		
 		String newLine = "\r\n ";
-		String stateStr = "- : Blue cell with no value | X : Red cell not fixed | Number: Value of cell (0 : red fixed cell) ";
+		String stateStr = "B : Blue not fixed | R : Red not fixed | Number: Blue fixed | X: Red fixed ";
+		stateStr += newLine;
 		stateStr += newLine;
 		
 		
@@ -186,16 +187,23 @@ public class GPS0hN0State implements GPSState {
 				GPS0hN0Cell cell = this.board[i][j];
 				if (cell.isFixed()){
 					
-					stateStr += " " + cell.getValue() + " ";
+					if (cell.getColor() == Color.red)
+					{
+						stateStr += " X ";
+					}
+					else
+					{
+						stateStr += " " + cell.getValue() + " ";
+					}
 				}
 				else
 				{
 					if (cell.getColor() == Color.blue){
-						stateStr += " - ";	
+						stateStr += " B ";	
 					}
 					else if (cell.getColor() == Color.red)
 					{
-						stateStr += " X ";
+						stateStr += " R ";
 					}			
 				}
 			}
@@ -209,6 +217,7 @@ public class GPS0hN0State implements GPSState {
 	
 	public void printStateForDebug(){
 			
+			System.out.println("____________________");
 			for(int i = 0 ; i < BOARD_SIZE ; i++)
 			{	
 				System.out.println();
@@ -216,12 +225,19 @@ public class GPS0hN0State implements GPSState {
 				{
 					GPS0hN0Cell cell = this.board[i][j];
 					if (cell.isFixed()){
-						System.out.print(" " + cell.getValue() + " ");
+						if (cell.getColor() == Color.red)
+						{
+							System.out.print(" R ");
+						}
+						else
+						{
+							System.out.print(" " + cell.getValue() + " ");
+						}
 					}
 					else
 					{
 						if (cell.getColor() == Color.blue){
-							System.out.print(" - ");	
+							System.out.print(" O ");	
 						}
 						else if (cell.getColor() == Color.red)
 						{
@@ -230,9 +246,9 @@ public class GPS0hN0State implements GPSState {
 					}
 				}
 				System.out.println();
-	
 			}
-			
+			System.out.println("____________________");
+			System.out.println();
 		}
 	
 	public GPS0hN0Cell[][] getBoard() {

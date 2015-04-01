@@ -43,11 +43,11 @@ public abstract class GPS0hN0Rule implements GPSRule {
 		auxState.getBoard()[i][j] = new GPS0hN0Cell(color);
 
 		int complete = 0;
-
+		
+		// TODO Esto hay que volarlo? 
 		String fixedCells = "";
 		/*
-		 * //auxState.printStateForDebug(); for (CellWrapper cell :
-		 * auxState.getCellsToCheck()) {
+		 * // for (CellWrapper cell : auxState.getCellsToCheck()) {
 		 * 
 		 * int visibleCells = visibleCells(cell, auxState.getBoard());
 		 * 
@@ -81,12 +81,10 @@ public abstract class GPS0hN0Rule implements GPSRule {
 					throw new NotAppliableException();
 				}
 
-				CellWrapper prevCell = ((GPS0hN0State) state).getCellsToCheck()
-						.get(i);
+				CellWrapper prevCell = ((GPS0hN0State) state).getCellsToCheck().get(i);
 
 				if (newCell.getCell().isCompleted() != prevCell.getCell()
 						.isCompleted()) {
-					System.out.println("SE RECHAZA POR NUEVA CONDICION");
 					throw new NotAppliableException();
 				}
 			}
@@ -94,16 +92,16 @@ public abstract class GPS0hN0Rule implements GPSRule {
 			
 
 		}
-
-		// System.out.println("COmplete original: " + completeCells_original);
-		// System.out.println("New board complete: " + complete);
+		
 		if (completeCells_original > complete) {
-			System.out.println("REJECTED");
 			throw new NotAppliableException();
 		}
-
+		
 		auxState.setComplete(complete);
-		System.out.println(fixedCells);
+		
+		// TODO Para debug... Hay que volarlo al final de todo
+		auxState.printStateForDebug();
+		
 		return auxState;
 
 	}

@@ -3,6 +3,7 @@ import gps.SearchStrategy;
 import gps.api.GPSProblem;
 import gps.api.impl.GPS0hN0Problem_allBlue;
 import gps.api.impl.GPS0hN0Problem_allRed;
+import gps.api.impl.GPS0hN0State;
 import gps.impl.GPS0hN0Engine;
 
 
@@ -10,8 +11,29 @@ public class Game0hN0Solver {
 
 	public static void main(String[] args) {
 		
-		if (args.length != 2) {
-			System.out.println("Invalid arguments.");
+		int gameSize = 0;
+		if (args.length == 3)
+		{
+			try {
+				gameSize = Integer.parseInt(args[2]);
+				if (gameSize == 5 || gameSize == 6 || gameSize == 7)
+				{
+					GPS0hN0State.changeSize(gameSize);
+					System.out.println("Size set to: " + gameSize);
+				}
+				else
+				{
+					System.out.println("Invalid arguments! Size must be '5', '6' or '7'");
+				}
+			}catch(NumberFormatException e){
+				System.out.println("Invalid arguments! Size must be a number.");
+				return;
+			}			
+		}
+		else if (args.length != 2) 
+		{
+			System.out.println("Invalid arguments!");
+			System.out.println("You need (all_blue | all_red) (bfs | dfs | iterative | greedy | astar) [5 | 6 | 7]");
 			return;
 		}		
 		
@@ -25,7 +47,7 @@ public class Game0hN0Solver {
 		} else if(problemApproach.equalsIgnoreCase("all_red")){
 			problem = new GPS0hN0Problem_allRed();
 		} else {
-			System.out.println("Invalid problem approach. Options: All_Blue or All_Red");
+			System.out.println("Invalid arguments! Problem approach must be 'all_blue' or 'all_red'");
 			return;
 		}
 		
@@ -55,7 +77,7 @@ public class Game0hN0Solver {
 		
 		if (searchStrategy.equalsIgnoreCase(SearchStrategy.Greedy.toString()))
 		{
-			System.out.println("Initializing " + SearchStrategy.AStar.toString() + " search...");
+			System.out.println("Initializing " + SearchStrategy.Greedy.toString() + " search...");
 			solver.engine(problem, SearchStrategy.Greedy);
 		}
 	}
